@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Random YouTube Video</title>
+<title>Random YouTube Video Loader</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -59,21 +59,10 @@
 <button onclick="playRandomVideo()">Play Random Video</button>
 
 <script>
-    var youtubeUrls = [
-        'https://www.youtube.com/watch?v=PoG-LRaf23w',
-        'https://www.youtube.com/watch?v=G4La2AonVl8',
-        'https://www.youtube.com/watch?v=MbnYNeuKrzc'
-        // ...add as many URLs as you have
-    ];
-
-    function playRandomVideo() {
-        var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
-        var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('v=')[1];
-        var ampersandPosition = videoId.indexOf('&');
-        if(ampersandPosition != -1) {
-            videoId = videoId.substring(0, ampersandPosition);
-        }
+    async function playRandomVideo() {
+        const response = await fetch('http://127.0.0.1:5000/random-video');
+        const data = await response.json();
+        const videoId = data.video_id;
 
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
@@ -81,7 +70,7 @@
     }
 
     // Automatically play a random video on page load
-    playRandomVideo();
+    window.onload = playRandomVideo;
 </script>
 </body>
 </html>
