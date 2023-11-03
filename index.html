@@ -70,7 +70,7 @@
 
 <script>
     var youtubeUrls = [
-               'https://www.youtube.com/watch?v=PoG-LRaf23w',
+        // ... [your array of YouTube URLs]        'https://www.youtube.com/watch?v=PoG-LRaf23w',
         'https://www.youtube.com/watch?v=G4La2AonVl8',
         'https://www.youtube.com/watch?v=MbnYNeuKrzc',
         'https://www.youtube.com/watch?v=ciU0miiiAWI&list=PL8ii-j4tIrWgG21fSG0V-DfVPNqoCvUof&index=1&pp=iAQB',
@@ -242,10 +242,8 @@
 'https://www.youtube.com/watch?v=FcJvc_6hlis',
 'https://www.youtube.com/watch?v=rBBz_d1YHsI',
 'https://www.youtube.com/watch?v=OMgBZ2cTITI',
+        
     ];
-
-
-    // ... [rest of your script]
 
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
@@ -258,7 +256,7 @@
 
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
-                           '?autoplay=1&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                           '?autoplay=1&mute=1&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
     // Automatically play a random video on page load
