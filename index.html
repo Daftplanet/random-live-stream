@@ -244,6 +244,9 @@
 'https://www.youtube.com/watch?v=OMgBZ2cTITI',
     ];
 
+
+    // ... [rest of your script]
+
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
@@ -255,11 +258,12 @@
 
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
-                           '?autoplay=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                           '?autoplay=1&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
     // Automatically play a random video on page load
     playRandomVideo();
 </script>
+
 </body>
 </html>
