@@ -8,33 +8,57 @@
     body {
         font-family: Arial, sans-serif;
         margin: 0;
-        padding: 20px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+        background: black;
+        overflow: hidden;
     }
 
+    /* Updated button styles */
     button {
-        padding: 10px 20px;
-        margin-top: 10px;
-        background-color: #008CBA;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        background-color: #FF0000;
         color: white;
-        border: none;
+        border-radius: 4px;
         cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #005f5f;
+        transition: transform 0.2s;
+        animation: pulsate 1s infinite;
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        width: 200px;
     }
 
     #player {
-        margin-top: 20px;
+        position: relative;
+        width: 90%;
+        max-width: 1280px;
+        padding-top: 45%;
+    }
+
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 </style>
 </head>
 <body>
-<button onclick="playRandomVideo()">Play Random Video</button>
+
 <div id="player"></div>
+<button onclick="playRandomVideo()">Play Random Video</button>
 
 <script>
-    // List of YouTube URLs
     var youtubeUrls = [
         'https://www.youtube.com/watch?v=PoG-LRaf23w',
         'https://www.youtube.com/watch?v=G4La2AonVl8',
@@ -48,12 +72,16 @@
         var videoId = randomUrl.split('v=')[1];
         var ampersandPosition = videoId.indexOf('&');
         if(ampersandPosition != -1) {
-          videoId = videoId.substring(0, ampersandPosition);
+            videoId = videoId.substring(0, ampersandPosition);
         }
 
         var player = document.getElementById('player');
-        player.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
+        player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
+                           '?autoplay=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
+
+    // Automatically play a random video on page load
+    playRandomVideo();
 </script>
 </body>
 </html>
