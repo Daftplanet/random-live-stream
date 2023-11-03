@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random YouTube Video Loader</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin-top: 10px;
+        background-color: #008CBA;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #005f5f;
+    }
+
+    #player {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<button onclick="playRandomVideo()">Play Random Video</button>
+<div id="player"></div>
+
+<script>
+    // List of YouTube URLs
+    var youtubeUrls = [
+        'https://www.youtube.com/watch?v=PoG-LRaf23w',
+        'https://www.youtube.com/watch?v=G4La2AonVl8',
+        'https://www.youtube.com/watch?v=MbnYNeuKrzc'
+        // ...add as many URLs as you have
+    ];
+
+    function playRandomVideo() {
+        var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
+        var randomUrl = youtubeUrls[randomIndex];
+        var videoId = randomUrl.split('v=')[1];
+        var ampersandPosition = videoId.indexOf('&');
+        if(ampersandPosition != -1) {
+          videoId = videoId.substring(0, ampersandPosition);
+        }
+
+        var player = document.getElementById('player');
+        player.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
+    }
+</script>
+</body>
+</html>
