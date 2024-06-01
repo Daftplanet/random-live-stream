@@ -60,12 +60,19 @@
     }
 
     @media (max-width: 768px) {
-        #prevButton, #nextButton {
-            position: static; /* Reset positioning for stacking */
-            margin: 10px auto; /* Center buttons under the player */
-            transform: none; /* Remove transform */
-            display: block; /* Stack buttons */
+        #buttonContainer {
+            position: static;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
         }
+
+        #prevButton, #nextButton {
+            position: static; /* Remove absolute positioning */
+            transform: none;
+            margin: 10px; /* Provide some spacing */
+        }
+        
         #player {
             padding-top: 75%; /* Adjust video aspect for smaller screens */
         }
@@ -75,8 +82,10 @@
 <body>
 
 <div id="player"></div>
-<button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
-<button id="nextButton" onclick="playRandomVideo()">&#10095; Next</button>
+<div id="buttonContainer">
+    <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
+    <button id="nextButton" onclick="playRandomVideo()">&#10095; Next</button>
+</div>
 
 <script>
     var youtubeUrls = [
@@ -92,7 +101,7 @@
 
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
-                           '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                           '?autoplay=1&mute=1&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
     // Automatically play a random video on page load
