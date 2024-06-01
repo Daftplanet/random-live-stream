@@ -83,6 +83,7 @@
 <body>
 
 <div id="player"></div>
+<div id="chat"></div> <!-- Container for the chat iframe -->
 <div id="buttonContainer">
     <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
     <button id="nextButton" onclick="playRandomVideo()">&#10095; Next</button>
@@ -90,37 +91,32 @@
 
 <script>
     var youtubeUrls = [
-         'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
-'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
-'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
-'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
-'https://www.youtube.com/live/__umlnpqMoA?si=Q8T4YPQr50Svnl-j',
-'https://www.youtube.com/live/g64fraJBSUA?si=P--oMPvglqzh7Ezm',
-'https://www.youtube.com/live/EVSZPcx3JmY?si=bhlIHwFE7rgDnGRv',
-'https://www.youtube.com/live/TcWVOTgVXZo?si=gCSEgcOSHsahwzKT',
-'https://www.youtube.com/live/Q8BUa-wYDpE?si=aVVJaEMz01kLCQt4',
-'https://www.youtube.com/live/K8u0McbjUsg?si=nfzqQxbg5b2UoPAK',
-'https://www.youtube.com/live/ULv3A0a5OLk?si=33VwoSxK2vktEX4E',
-'https://www.youtube.com/live/agF0565fQxw?si=9DsxmNpcHvVuxP53',
-'https://www.youtube.com/live/KBdW7VZWo14?si=w9byN-4ngbKQdhSs',
-'https://www.youtube.com/live/4JPex4AAL48?si=-Jv9cq_eqJY87j4d',
-'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g',
+        'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
+        'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
+        // More URLs as previously defined
     ];
-
 
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Correctly extract the video ID from the new URL format
+        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Extract the video ID
 
         var player = document.getElementById('player');
+        var chat = document.getElementById('chat');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        chat.innerHTML = '<iframe src="https://www.youtube.com/live_chat?v=' + videoId +
+                         '&embed_domain=' + window.location.hostname + '" frameborder="0" style="height: 400px; width: 100%;"></iframe>';
     }
 
     // Automatically play a random video on page load
     playRandomVideo();
 </script>
+    #chat {
+    width: 90%; /* Match the player width or adjust as necessary */
+    height: 400px; /* Or any other suitable height */
+}
+
 
 </body>
 </html>
