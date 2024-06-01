@@ -23,7 +23,7 @@
         position: relative;
         width: 90%;
         max-width: 1280px;
-        padding-top: 56.25%;
+        padding-top: 56.25%; /* 16:9 Aspect Ratio */
     }
     iframe {
         position: absolute;
@@ -41,31 +41,40 @@
         cursor: pointer;
         z-index: 1000;
     }
+    #prevButton, #nextButton {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    #prevButton {
+        left: 10px;
+    }
+    #nextButton {
+        right: 10px;
+    }
     #chat {
         width: 90%;
         max-width: 1280px;
         height: 400px;
         display: none; /* Initially hide the chat */
         overflow: auto;
-    }
-    #toggleChat {
-        margin-top: 10px;
-    }
-    #buttonContainer {
         margin-top: 20px;
     }
+    #buttonContainer {
+        position: relative;
+        width: 100%;
+        max-width: 1280px;
+    }
     @media (max-width: 768px) {
-        #buttonContainer {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-        }
         #prevButton, #nextButton {
             position: static;
             margin: 10px;
+            display: block; /* Ensure buttons don't overlap video on smaller screens */
         }
-        #player {
-            padding-top: 75%;
+        #buttonContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     }
 </style>
@@ -82,8 +91,8 @@
 
 <script>
     var youtubeUrls = [
-        'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
-        // Add more YouTube URLs
+         'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
+        // More URLs
     ];
 
     function playRandomVideo() {
@@ -96,8 +105,8 @@
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
         chat.innerHTML = '<iframe src="https://www.youtube.com/live_chat?v=' + videoId +
-                         '&embed_domain=' + window.location.hostname + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
-        chat.style.display = 'none'; // Hide chat when video changes
+                         '&embed_domain=' + window.location.hostname + '" style="width: 100%; height: 100%;" frameborder="0" allow="fullscreen;"></iframe>';
+        chat.style.display = 'none'; // Ensure chat is hidden after video switch
     }
 
     function toggleChat() {
