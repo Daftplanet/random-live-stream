@@ -19,10 +19,12 @@
         background: black;
         overflow: hidden;
     }
-    #player {
-        position: relative;
+    #player, #chat, #subscribe {
         width: 90%;
         max-width: 1280px;
+    }
+    #player {
+        position: relative;
         padding-top: 56.25%; /* 16:9 Aspect Ratio */
     }
     iframe {
@@ -53,10 +55,12 @@
         right: 10px;
     }
     #chat {
-        width: 90%;
-        max-width: 1280px;
         height: 400px;
         margin-top: 20px;
+    }
+    #subscribe {
+        text-align: center;
+        margin-bottom: 20px;
     }
     @media (max-width: 768px) {
         #buttonContainer {
@@ -76,11 +80,16 @@
         #chat {
             height: 300px;
         }
+        #subscribe {
+            order: 1;
+            margin-top: 20px;
+        }
     }
 </style>
 </head>
 <body>
 
+<div id="subscribe"></div>
 <div id="player"></div>
 <div id="buttonContainer">
     <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
@@ -107,17 +116,39 @@
         'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g',
     ];
 
+    var channelIds = [
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw', // Replace these with actual channel IDs
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+        'UC_x5XG1OV2P6uZZ5FSM9Ttw',
+    ];
+
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
         var videoId = randomUrl.split('/live/')[1].split('?')[0];
+        var channelId = channelIds[randomIndex];
 
         var player = document.getElementById('player');
         var chat = document.getElementById('chat');
+        var subscribe = document.getElementById('subscribe');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
         chat.innerHTML = '<iframe src="https://www.youtube.com/live_chat?v=' + videoId +
                          '&embed_domain=' + window.location.hostname + '" style="width: 100%; height: 100%;" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>';
+        subscribe.innerHTML = '<iframe src="https://www.youtube.com/subscribe_embed?channel=' + channelId +
+                              '" style="width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
     // Automatically play a random video on page load
