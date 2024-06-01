@@ -6,39 +6,25 @@
 <title>Watch a Random YouTube Video</title>
 <link rel="icon" type="image/png" href="https://www.monsterkong.com/hosted/images/54/7c5980209d466d81a838f1cad607e3/daftplanet_monsterkong_logo_black_background_4d7336c8-dd69-4777-bfae-d20e38852245.png">
 <meta name="description" content="Unearth hidden gems with our 'Random YouTube Video' feature! Perfect for discovering trending, funny, or bizarre YouTube videos. Fresh, daily content at your fingertips.">
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-M2TM5C4');</script>
-<!-- End Google Tag Manager -->
 <style>
     body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-        flex-direction: column;
-        background: black;
-        overflow: hidden;
-    }
-
-    #subscribe, #player {
-        width: 90%;
-        max-width: 1280px;
-    }
-
-    #subscribe {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Centers horizontally in the flex container */
+    align-items: center;     /* Centers vertically in the flex container */
+    min-height: 100vh;       /* Minimum height of 100% of the viewport height */
+    width: 100vw;            /* Width set to 100% of the viewport width */
+    flex-direction: column;
+    background: black;
+    overflow: hidden;
+}
 
     #player {
         position: relative;
+        width: 90%;
+        max-width: 1280px;
         padding-top: 56.25%; /* 16:9 Aspect Ratio */
     }
 
@@ -87,21 +73,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             transform: none;
             margin: 10px; /* Provide some spacing */
         }
-
+        
         #player {
             padding-top: 75%; /* Adjust video aspect for smaller screens */
-        }
-
-        #subscribe {
-            order: 1;
-            margin-top: 20px;
         }
     }
 </style>
 </head>
 <body>
 
-<div id="subscribe"></div>
 <div id="player"></div>
 <div id="buttonContainer">
     <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
@@ -110,63 +90,36 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <script>
     var youtubeUrls = [
-        'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
-        'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
-        'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
-        'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
-        'https://www.youtube.com/live/__umlnpqMoA?si=Q8T4YPQr50Svnl-j',
-        'https://www.youtube.com/live/g64fraJBSUA?si=P--oMPvglqzh7Ezm',
-        'https://www.youtube.com/live/EVSZPcx3JmY?si=bhlIHwFE7rgDnGRv',
-        'https://www.youtube.com/live/TcWVOTgVXZo?si=gCSEgcOSHsahwzKT',
-        'https://www.youtube.com/live/Q8BUa-wYDpE?si=aVVJaEMz01kLCQt4',
-        'https://www.youtube.com/live/K8u0McbjUsg?si=nfzqQxbg5b2UoPAK',
-        'https://www.youtube.com/live/ULv3A0a5OLk?si=33VwoSxK2vktEX4E',
-        'https://www.youtube.com/live/agF0565fQxw?si=9DsxmNpcHvVuxP53',
-        'https://www.youtube.com/live/KBdW7VZWo14?si=w9byN-4ngbKQdhSs',
-        'https://www.youtube.com/live/4JPex4AAL48?si=-Jv9cq_eqJY87j4d',
-        'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g'
+         'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
+'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
+'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
+'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
+'https://www.youtube.com/live/__umlnpqMoA?si=Q8T4YPQr50Svnl-j',
+'https://www.youtube.com/live/g64fraJBSUA?si=P--oMPvglqzh7Ezm',
+'https://www.youtube.com/live/EVSZPcx3JmY?si=bhlIHwFE7rgDnGRv',
+'https://www.youtube.com/live/TcWVOTgVXZo?si=gCSEgcOSHsahwzKT',
+'https://www.youtube.com/live/Q8BUa-wYDpE?si=aVVJaEMz01kLCQt4',
+'https://www.youtube.com/live/K8u0McbjUsg?si=nfzqQxbg5b2UoPAK',
+'https://www.youtube.com/live/ULv3A0a5OLk?si=33VwoSxK2vktEX4E',
+'https://www.youtube.com/live/agF0565fQxw?si=9DsxmNpcHvVuxP53',
+'https://www.youtube.com/live/KBdW7VZWo14?si=w9byN-4ngbKQdhSs',
+'https://www.youtube.com/live/4JPex4AAL48?si=-Jv9cq_eqJY87j4d',
+'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g',
     ];
 
-    function getChannelId(videoId) {
-        const apiKey = 'AIzaSyD84AiG--68_DTmxWgVhYwFKSz0X3r1jOs'; // Replace with your YouTube Data API key
-        const url = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet`;
-
-        return fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.items && data.items.length > 0) {
-                    return data.items[0].snippet.channelId;
-                } else {
-                    throw new Error('Channel ID not found');
-                }
-            });
-    }
 
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('/live/')[1].split('?')[0];
+        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Correctly extract the video ID from the new URL format
 
-        getChannelId(videoId).then(channelId => {
-            var player = document.getElementById('player');
-            var subscribe = document.getElementById('subscribe');
-            player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
-                               '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-            subscribe.innerHTML = '<div class="g-ytsubscribe" data-channelid="' + channelId + '" data-layout="full" data-count="default"></div>';
-            gapi.ytsubscribe.go(); // Refresh the subscription button
-        }).catch(error => {
-            console.error('Error fetching channel ID:', error);
-        });
+        var player = document.getElementById('player');
+        player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
+                           '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
-    function loadGoogleApi() {
-        var script = document.createElement('script');
-        script.src = "https://apis.google.com/js/platform.js";
-        script.onload = playRandomVideo; // Play a random video once the script loads
-        document.body.appendChild(script);
-    }
-
-    loadGoogleApi(); // Load the Google API script
+    // Automatically play a random video on page load
+    playRandomVideo();
 </script>
 
 </body>
