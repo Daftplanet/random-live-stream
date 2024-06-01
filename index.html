@@ -7,18 +7,18 @@
 <link rel="icon" type="image/png" href="https://www.monsterkong.com/hosted/images/54/7c5980209d466d81a838f1cad607e3/daftplanet_monsterkong_logo_black_background_4d7336c8-dd69-4777-bfae-d20e38852245.png">
 <meta name="description" content="Unearth hidden gems with our 'Random YouTube Video' feature! Perfect for discovering trending, funny, or bizarre YouTube videos. Fresh, daily content at your fingertips.">
 <style>
-      body {
-height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: black;
-    overflow: hidden;
-}
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+        background: black;
+        overflow: hidden;
+    }
 
     #player {
         position: relative;
@@ -101,7 +101,7 @@ height: 100%;
 
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
-                           '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                           '?autoplay=1&mute=1&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
     // Automatically play a random video on page load
