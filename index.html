@@ -4,21 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Watch a Random YouTube Video</title>
-<link rel="icon" type="image/png" href="https://www.monsterkong.com/hosted/images/54/7c5980209d466d81a838f1cad607e3/daftplanet_monsterkong_logo_black_background_4d7336c8-dd69-4777-bfae-d20e38852245.png"> <!-- Add your thumbnail image path here -->
-<meta name="description" content="Unearth hidden gems with our 'Find your next viral hit with our 'Random YouTube Video' feature! Perfect for discovering trending, funny, or bizarre YouTube videos. Fresh, daily content at your fingertips.">
-property="og:title" content="Random YouTube Video" /><meta
-property="og:url" content="https://monsterkong.club/random-youtube-video" /><meta
-property="og:site_name" content="Random YouTube Video" /><meta
-property="og:description" content="Stumble upon unique content with our 'Random YouTube Video Generator'! Find the latest, greatest, and the hilariously obscure. Daily updates, endless surprises!" /><meta
+<link rel="icon" type="image/png" href="https://www.monsterkong.com/hosted/images/54/7c5980209d466d81a838f1cad607e3/daftplanet_monsterkong_logo_black_background_4d7336c8-dd69-4777-bfae-d20e38852245.png">
+<meta name="description" content="Unearth hidden gems with our 'Random YouTube Video' feature! Perfect for discovering trending, funny, or bizarre YouTube videos. Fresh, daily content at your fingertips.">
+<meta property="og:title" content="Random YouTube Video" />
+<meta property="og:url" content="https://monsterkong.club/random-youtube-video" />
+<meta property="og:site_name" content="Random YouTube Video" />
+<meta property="og:description" content="Stumble upon unique content with our 'Random YouTube Video Generator'! Find the latest, greatest, and the hilariously obscure. Daily updates, endless surprises!" />
 <link rel="canonical" href="https://www.monsterkong.club/" />
 
-    <!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-E0380Y8NN3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-E0380Y8NN3');
 </script>
 
@@ -36,7 +35,6 @@ property="og:description" content="Stumble upon unique content with our 'Random 
         overflow: hidden;
     }
 
-    /* Updated button styles */
     button {
         padding: 15px 30px;
         font-size: 18px;
@@ -78,7 +76,6 @@ property="og:description" content="Stumble upon unique content with our 'Random 
 
 <script>
     var youtubeUrls = [
-        // ... [your array of YouTube URLs]    
         'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
 'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
 'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
@@ -99,11 +96,7 @@ property="og:description" content="Stumble upon unique content with our 'Random 
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('v=')[1];
-        var ampersandPosition = videoId.indexOf('&');
-        if(ampersandPosition != -1) {
-            videoId = videoId.substring(0, ampersandPosition);
-        }
+        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Correctly extract the video ID from the new URL format
 
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
