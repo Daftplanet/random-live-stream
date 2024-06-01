@@ -8,26 +8,23 @@
 <meta name="description" content="Unearth hidden gems with our 'Random YouTube Video' feature! Perfect for discovering trending, funny, or bizarre YouTube videos. Fresh, daily content at your fingertips.">
 <style>
     body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center; /* Centers horizontally in the flex container */
-    align-items: center;     /* Centers vertically in the flex container */
-    min-height: 100vh;       /* Minimum height of 100% of the viewport height */
-    width: 100vw;            /* Width set to 100% of the viewport width */
-    flex-direction: column;
-    background: black;
-    overflow: hidden;
-}
-
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+        background: black;
+        overflow: hidden;
+    }
     #player {
         position: relative;
         width: 90%;
         max-width: 1280px;
-        padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        padding-top: 56.25%;
     }
-
     iframe {
         position: absolute;
         top: 0;
@@ -35,7 +32,6 @@
         width: 100%;
         height: 100%;
     }
-
     button {
         padding: 10px 20px;
         font-size: 16px;
@@ -45,37 +41,31 @@
         cursor: pointer;
         z-index: 1000;
     }
-
-    #prevButton, #nextButton {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+    #chat {
+        width: 90%;
+        max-width: 1280px;
+        height: 400px;
+        display: none; /* Initially hide the chat */
+        overflow: auto;
     }
-
-    #prevButton {
-        left: 10px;
+    #toggleChat {
+        margin-top: 10px;
     }
-
-    #nextButton {
-        right: 10px;
+    #buttonContainer {
+        margin-top: 20px;
     }
-
     @media (max-width: 768px) {
         #buttonContainer {
-            position: static;
             display: flex;
             justify-content: space-around;
             width: 100%;
         }
-
         #prevButton, #nextButton {
-            position: static; /* Remove absolute positioning */
-            transform: none;
-            margin: 10px; /* Provide some spacing */
+            position: static;
+            margin: 10px;
         }
-        
         #player {
-            padding-top: 75%; /* Adjust video aspect for smaller screens */
+            padding-top: 75%;
         }
     }
 </style>
@@ -87,35 +77,32 @@
     <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
     <button id="nextButton" onclick="playRandomVideo()">&#10095; Next</button>
 </div>
+<button id="toggleChat" onclick="toggleChat()">Toggle Chat</button>
+<div id="chat"></div>
 
 <script>
     var youtubeUrls = [
-         'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
-'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
-'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
-'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
-'https://www.youtube.com/live/__umlnpqMoA?si=Q8T4YPQr50Svnl-j',
-'https://www.youtube.com/live/g64fraJBSUA?si=P--oMPvglqzh7Ezm',
-'https://www.youtube.com/live/EVSZPcx3JmY?si=bhlIHwFE7rgDnGRv',
-'https://www.youtube.com/live/TcWVOTgVXZo?si=gCSEgcOSHsahwzKT',
-'https://www.youtube.com/live/Q8BUa-wYDpE?si=aVVJaEMz01kLCQt4',
-'https://www.youtube.com/live/K8u0McbjUsg?si=nfzqQxbg5b2UoPAK',
-'https://www.youtube.com/live/ULv3A0a5OLk?si=33VwoSxK2vktEX4E',
-'https://www.youtube.com/live/agF0565fQxw?si=9DsxmNpcHvVuxP53',
-'https://www.youtube.com/live/KBdW7VZWo14?si=w9byN-4ngbKQdhSs',
-'https://www.youtube.com/live/4JPex4AAL48?si=-Jv9cq_eqJY87j4d',
-'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g',
+        'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
+        // Add more YouTube URLs
     ];
-
 
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Correctly extract the video ID from the new URL format
+        var videoId = randomUrl.split('/live/')[1].split('?')[0];
 
         var player = document.getElementById('player');
+        var chat = document.getElementById('chat');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        chat.innerHTML = '<iframe src="https://www.youtube.com/live_chat?v=' + videoId +
+                         '&embed_domain=' + window.location.hostname + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
+        chat.style.display = 'none'; // Hide chat when video changes
+    }
+
+    function toggleChat() {
+        var chat = document.getElementById('chat');
+        chat.style.display = (chat.style.display === 'none' ? 'block' : 'none');
     }
 
     // Automatically play a random video on page load
