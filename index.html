@@ -17,6 +17,7 @@
         min-height: 100vh;
         flex-direction: column;
         background: black;
+        color: white;
         overflow: hidden;
     }
 
@@ -24,7 +25,7 @@
         position: relative;
         width: 90%;
         max-width: 1280px;
-        padding-top: 45%;
+        padding-top: 56.25%; /* 16:9 Aspect Ratio */
     }
 
     iframe {
@@ -55,17 +56,43 @@
     #nextButton {
         right: 10px;
     }
+
+    @media (max-width: 600px) {
+        #player {
+            width: 95%;
+            padding-top: 75%; /* Adjusted for a more square-like aspect ratio on smaller screens */
+        }
+
+        button {
+            padding: 8px 16px;
+            font-size: 14px; /* Smaller buttons on mobile */
+        }
+
+        #prevButton, #nextButton {
+            position: fixed; /* Fix position to viewport on small screens */
+            top: unset;
+            bottom: 20px; /* Move to bottom to avoid overlapping the video */
+        }
+
+        #prevButton {
+            left: 20px; /* Position towards the bottom-left corner */
+        }
+
+        #nextButton {
+            right: 20px; /* Position towards the bottom-right corner */
+        }
+    }
 </style>
 </head>
 <body>
 
 <div id="player"></div>
 <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
-<button id="nextButton" onclick="playRandomVideo()">&#10095; Random</button>
+<button id="nextButton" onclick="playRandomVideo()">&#10095; Next</button>
 
 <script>
     var youtubeUrls = [
-         'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
+          'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
 'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
 'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
 'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
@@ -86,15 +113,14 @@
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Correctly extract the video ID from the new URL format
+        var videoId = randomUrl.split('/live/')[1].split('?')[0];
 
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=1&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
-    // Automatically play a random video on page load
-    playRandomVideo();
+    playRandomVideo(); // Automatically play a random video on page load
 </script>
 
 </body>
