@@ -8,26 +8,23 @@
 <meta name="description" content="Unearth hidden gems with our 'Random YouTube Video' feature! Perfect for discovering trending, funny, or bizarre YouTube videos. Fresh, daily content at your fingertips.">
 <style>
     body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center; /* Centers horizontally in the flex container */
-    align-items: center;     /* Centers vertically in the flex container */
-    min-height: 100vh;       /* Minimum height of 100% of the viewport height */
-    width: 100vw;            /* Width set to 100% of the viewport width */
-    flex-direction: column;
-    background: black;
-    overflow: hidden;
-}
-
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+        background: black;
+        overflow: hidden;
+    }
     #player {
         position: relative;
         width: 90%;
         max-width: 1280px;
         padding-top: 56.25%; /* 16:9 Aspect Ratio */
     }
-
     iframe {
         position: absolute;
         top: 0;
@@ -35,7 +32,6 @@
         width: 100%;
         height: 100%;
     }
-
     button {
         padding: 10px 20px;
         font-size: 16px;
@@ -45,21 +41,33 @@
         cursor: pointer;
         z-index: 1000;
     }
-
     #prevButton, #nextButton {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
     }
-
     #prevButton {
         left: 10px;
     }
-
     #nextButton {
         right: 10px;
     }
-
+    #commentsSection {
+        width: 90%;
+        max-width: 1280px;
+        margin-top: 20px;
+        background: #333;
+        color: #fff;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    textarea {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #commentsContainer {
+        margin-top: 20px;
+    }
     @media (max-width: 768px) {
         #buttonContainer {
             position: static;
@@ -67,13 +75,11 @@
             justify-content: space-around;
             width: 100%;
         }
-
         #prevButton, #nextButton {
             position: static; /* Remove absolute positioning */
             transform: none;
             margin: 10px; /* Provide some spacing */
         }
-        
         #player {
             padding-top: 75%; /* Adjust video aspect for smaller screens */
         }
@@ -87,36 +93,59 @@
     <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
     <button id="nextButton" onclick="playRandomVideo()">&#10095; Next</button>
 </div>
+<div id="commentsSection">
+    <form id="commentForm">
+        <textarea id="commentText" placeholder="Write a comment..." required></textarea>
+        <button type="submit">Post Comment</button>
+    </form>
+    <div id="commentsContainer">
+        <!-- Comments will be displayed here -->
+    </div>
+</div>
 
 <script>
     var youtubeUrls = [
-         'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
-'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
-'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
-'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
-'https://www.youtube.com/live/__umlnpqMoA?si=Q8T4YPQr50Svnl-j',
-'https://www.youtube.com/live/g64fraJBSUA?si=P--oMPvglqzh7Ezm',
-'https://www.youtube.com/live/EVSZPcx3JmY?si=bhlIHwFE7rgDnGRv',
-'https://www.youtube.com/live/TcWVOTgVXZo?si=gCSEgcOSHsahwzKT',
-'https://www.youtube.com/live/Q8BUa-wYDpE?si=aVVJaEMz01kLCQt4',
-'https://www.youtube.com/live/K8u0McbjUsg?si=nfzqQxbg5b2UoPAK',
-'https://www.youtube.com/live/ULv3A0a5OLk?si=33VwoSxK2vktEX4E',
-'https://www.youtube.com/live/agF0565fQxw?si=9DsxmNpcHvVuxP53',
-'https://www.youtube.com/live/KBdW7VZWo14?si=w9byN-4ngbKQdhSs',
-'https://www.youtube.com/live/4JPex4AAL48?si=-Jv9cq_eqJY87j4d',
-'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g',
+        'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
+        'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
+        'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
+        'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
+        'https://www.youtube.com/live/__umlnpqMoA?si=Q8T4YPQr50Svnl-j',
+        'https://www.youtube.com/live/g64fraJBSUA?si=P--oMPvglqzh7Ezm',
+        'https://www.youtube.com/live/EVSZPcx3JmY?si=bhlIHwFE7rgDnGRv',
+        'https://www.youtube.com/live/TcWVOTgVXZo?si=gCSEgcOSHsahwzKT',
+        'https://www.youtube.com/live/Q8BUa-wYDpE?si=aVVJaEMz01kLCQt4',
+        'https://www.youtube.com/live/K8u0McbjUsg?si=nfzqQxbg5b2UoPAK',
+        'https://www.youtube.com/live/ULv3A0a5OLk?si=33VwoSxK2vktEX4E',
+        'https://www.youtube.com/live/agF0565fQxw?si=9DsxmNpcHvVuxP53',
+        'https://www.youtube.com/live/KBdW7VZWo14?si=w9byN-4ngbKQdhSs',
+        'https://www.youtube.com/live/4JPex4AAL48?si=-Jv9cq_eqJY87j4d',
+        'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g',
     ];
-
 
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Correctly extract the video ID from the new URL format
+        var videoId = randomUrl.split('/live/')[1].split('?')[0];
 
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
+
+    document.getElementById('commentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var commentText = document.getElementById('commentText').value;
+        if (commentText.trim()) {
+            var commentsContainer = document.getElementById('commentsContainer');
+            var newComment = document.createElement('div');
+            newComment.textContent = commentText;
+            newComment.style.backgroundColor = '#444';
+            newComment.style.padding = '10px';
+            newComment.style.marginBottom = '10px';
+            commentsContainer.appendChild(newComment);
+            document.getElementById('commentForm').reset();
+        }
+    });
 
     // Automatically play a random video on page load
     playRandomVideo();
