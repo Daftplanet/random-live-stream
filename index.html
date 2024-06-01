@@ -4,23 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Watch a Random YouTube Video</title>
-<link rel="icon" type="image/png" href="https://www.monsterkong.com/hosted/images/54/7c5980209d466d81a838f1cad607e3/daftplanet_monsterkong_logo_black_background_4d7336c8-dd69-4777-bfae-d20e38852245.png">
-<meta name="description" content="Unearth hidden gems with our 'Random YouTube Video' feature! Perfect for discovering trending, funny, or bizarre YouTube videos. Fresh, daily content at your fingertips.">
-<meta property="og:title" content="Random YouTube Video" />
-<meta property="og:url" content="https://monsterkong.club/random-youtube-video" />
-<meta property="og:site_name" content="Random YouTube Video" />
-<meta property="og:description" content="Stumble upon unique content with our 'Random YouTube Video Generator'! Find the latest, greatest, and the hilariously obscure. Daily updates, endless surprises!" />
-<link rel="canonical" href="https://www.monsterkong.club/" />
-
-<!-- Google tag (gtag.js) -->
-<script async src="www.googletagmanager.com/ns.html?id=GTM-M2TM5C4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-E0380Y8NN3');
-</script>
-
+<link rel="icon" type="image/png" href="your_favicon_here.png">
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -28,38 +12,19 @@
         padding: 0;
         display: flex;
         justify-content: center;
-        align-items: center;
+        background: #f9f9f9;
         min-height: 100vh;
-        flex-direction: column;
-        background: black;
-        overflow: hidden;
     }
-
-    button {
-        padding: 15px 30px;
-        font-size: 18px;
-        font-weight: bold;
-        background-color: #FF0000;
-        color: white;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: transform 0.2s;
-        animation: pulsate 1s infinite;
-        position: absolute;
-        bottom: 10%;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 10;
-        width: 200px;
-    }
-
-    #player {
-        position: relative;
-        width: 90%;
+    #main-content {
+        display: flex;
+        width: 100%;
         max-width: 1280px;
-        padding-top: 45%;
     }
-
+    #player {
+        flex-grow: 1;
+        position: relative;
+        padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    }
     iframe {
         position: absolute;
         top: 0;
@@ -67,44 +32,78 @@
         width: 100%;
         height: 100%;
     }
+    #playlist {
+        width: 300px;
+        overflow-y: auto;
+        height: 100vh; /* Full-height viewport */
+        border-left: 1px solid #ccc;
+    }
+    .playlist-item {
+        cursor: pointer;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+    }
+    .playlist-item img {
+        width: 50px;
+        height: 28px;
+        margin-right: 10px;
+    }
+    .playlist-item:hover {
+        background-color: #f0f0f0;
+    }
 </style>
 </head>
 <body>
 
-<div id="player"></div>
-<button onclick="playRandomVideo()">Play Random Live Stream Video</button>
+<div id="main-content">
+    <div id="player"></div>
+    <div id="playlist">
+        <!-- JavaScript will populate this -->
+    </div>
+</div>
 
 <script>
     var youtubeUrls = [
         'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
-'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
-'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
-'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
-'https://www.youtube.com/live/__umlnpqMoA?si=Q8T4YPQr50Svnl-j',
-'https://www.youtube.com/live/g64fraJBSUA?si=P--oMPvglqzh7Ezm',
-'https://www.youtube.com/live/EVSZPcx3JmY?si=bhlIHwFE7rgDnGRv',
-'https://www.youtube.com/live/TcWVOTgVXZo?si=gCSEgcOSHsahwzKT',
-'https://www.youtube.com/live/Q8BUa-wYDpE?si=aVVJaEMz01kLCQt4',
-'https://www.youtube.com/live/K8u0McbjUsg?si=nfzqQxbg5b2UoPAK',
-'https://www.youtube.com/live/ULv3A0a5OLk?si=33VwoSxK2vktEX4E',
-'https://www.youtube.com/live/agF0565fQxw?si=9DsxmNpcHvVuxP53',
-'https://www.youtube.com/live/KBdW7VZWo14?si=w9byN-4ngbKQdhSs',
-'https://www.youtube.com/live/4JPex4AAL48?si=-Jv9cq_eqJY87j4d',
-'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g',
+        'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
+        // Add more URLs as needed
     ];
 
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Correctly extract the video ID from the new URL format
-
+        var videoId = randomUrl.split('/live/')[1].split('?')[0];
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=1&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
-    // Automatically play a random video on page load
-    playRandomVideo();
+    function populatePlaylist() {
+        var playlist = document.getElementById('playlist');
+        youtubeUrls.forEach(function(url, index) {
+            var videoId = url.split('/live/')[1].split('?')[0];
+            var item = document.createElement('div');
+            item.className = 'playlist-item';
+            item.innerHTML = '<img src="https://img.youtube.com/vi/' + videoId + '/default.jpg" alt="Thumbnail"><span>Video ' + (index + 1) + '</span>';
+            item.onclick = function() {
+                playVideo(videoId);
+            };
+            playlist.appendChild(item);
+        });
+    }
+
+    function playVideo(videoId) {
+        var player = document.getElementById('player');
+        player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
+                           '?autoplay=1&mute=1&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+    }
+
+    window.onload = function() {
+        playRandomVideo();
+        populatePlaylist();
+    };
 </script>
 
 </body>
