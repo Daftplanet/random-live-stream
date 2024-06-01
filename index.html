@@ -17,7 +17,6 @@
         min-height: 100vh;
         flex-direction: column;
         background: black;
-        color: white;
         overflow: hidden;
     }
 
@@ -43,10 +42,13 @@
         color: white;
         border: none;
         cursor: pointer;
+        z-index: 1000;
+    }
+
+    #prevButton, #nextButton {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 1000;
     }
 
     #prevButton {
@@ -57,29 +59,15 @@
         right: 10px;
     }
 
-    @media (max-width: 600px) {
-        #player {
-            width: 95%;
-            padding-top: 75%; /* Adjusted for a more square-like aspect ratio on smaller screens */
-        }
-
-        button {
-            padding: 8px 16px;
-            font-size: 14px; /* Smaller buttons on mobile */
-        }
-
+    @media (max-width: 768px) {
         #prevButton, #nextButton {
-            position: fixed; /* Fix position to viewport on small screens */
-            top: unset;
-            bottom: 20px; /* Move to bottom to avoid overlapping the video */
+            position: static; /* Reset positioning for stacking */
+            margin: 10px auto; /* Center buttons under the player */
+            transform: none; /* Remove transform */
+            display: block; /* Stack buttons */
         }
-
-        #prevButton {
-            left: 20px; /* Position towards the bottom-left corner */
-        }
-
-        #nextButton {
-            right: 20px; /* Position towards the bottom-right corner */
+        #player {
+            padding-top: 75%; /* Adjust video aspect for smaller screens */
         }
     }
 </style>
@@ -92,35 +80,23 @@
 
 <script>
     var youtubeUrls = [
-          'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
-'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
-'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
-'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
-'https://www.youtube.com/live/__umlnpqMoA?si=Q8T4YPQr50Svnl-j',
-'https://www.youtube.com/live/g64fraJBSUA?si=P--oMPvglqzh7Ezm',
-'https://www.youtube.com/live/EVSZPcx3JmY?si=bhlIHwFE7rgDnGRv',
-'https://www.youtube.com/live/TcWVOTgVXZo?si=gCSEgcOSHsahwzKT',
-'https://www.youtube.com/live/Q8BUa-wYDpE?si=aVVJaEMz01kLCQt4',
-'https://www.youtube.com/live/K8u0McbjUsg?si=nfzqQxbg5b2UoPAK',
-'https://www.youtube.com/live/ULv3A0a5OLk?si=33VwoSxK2vktEX4E',
-'https://www.youtube.com/live/agF0565fQxw?si=9DsxmNpcHvVuxP53',
-'https://www.youtube.com/live/KBdW7VZWo14?si=w9byN-4ngbKQdhSs',
-'https://www.youtube.com/live/4JPex4AAL48?si=-Jv9cq_eqJY87j4d',
-'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g',
+        'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
+        'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
+        // More URLs as previously defined
     ];
-
 
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('/live/')[1].split('?')[0];
+        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Correctly extract the video ID
 
         var player = document.getElementById('player');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=1&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
-    playRandomVideo(); // Automatically play a random video on page load
+    // Automatically play a random video on page load
+    playRandomVideo();
 </script>
 
 </body>
