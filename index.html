@@ -52,20 +52,10 @@
     #nextButton {
         right: 10px;
     }
-    #commentsSection {
+    #chat {
         width: 90%;
         max-width: 1280px;
-        margin-top: 20px;
-        background: #333;
-        color: #fff;
-        padding: 15px;
-        box-sizing: border-box;
-    }
-    textarea {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    #commentsContainer {
+        height: 400px;
         margin-top: 20px;
     }
     @media (max-width: 768px) {
@@ -76,12 +66,15 @@
             width: 100%;
         }
         #prevButton, #nextButton {
-            position: static; /* Remove absolute positioning */
+            position: static;
             transform: none;
-            margin: 10px; /* Provide some spacing */
+            margin: 10px;
         }
         #player {
-            padding-top: 75%; /* Adjust video aspect for smaller screens */
+            padding-top: 75%;
+        }
+        #chat {
+            height: 300px;
         }
     }
 </style>
@@ -93,15 +86,7 @@
     <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
     <button id="nextButton" onclick="playRandomVideo()">&#10095; Next</button>
 </div>
-<div id="commentsSection">
-    <form id="commentForm">
-        <textarea id="commentText" placeholder="Write a comment..." required></textarea>
-        <button type="submit">Post Comment</button>
-    </form>
-    <div id="commentsContainer">
-        <!-- Comments will be displayed here -->
-    </div>
-</div>
+<div id="chat"></div>
 
 <script>
     var youtubeUrls = [
@@ -128,24 +113,12 @@
         var videoId = randomUrl.split('/live/')[1].split('?')[0];
 
         var player = document.getElementById('player');
+        var chat = document.getElementById('chat');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        chat.innerHTML = '<iframe src="https://www.youtube.com/live_chat?v=' + videoId +
+                         '&embed_domain=' + window.location.hostname + '" style="width: 100%; height: 100%;" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>';
     }
-
-    document.getElementById('commentForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        var commentText = document.getElementById('commentText').value;
-        if (commentText.trim()) {
-            var commentsContainer = document.getElementById('commentsContainer');
-            var newComment = document.createElement('div');
-            newComment.textContent = commentText;
-            newComment.style.backgroundColor = '#444';
-            newComment.style.padding = '10px';
-            newComment.style.marginBottom = '10px';
-            commentsContainer.appendChild(newComment);
-            document.getElementById('commentForm').reset();
-        }
-    });
 
     // Automatically play a random video on page load
     playRandomVideo();
