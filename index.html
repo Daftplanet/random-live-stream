@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Play Random YouTube Live</title>
+<title>Watch a Random YouTube Video</title>
 <link rel="icon" type="image/png" href="your_favicon_here.png">
 <style>
     body {
@@ -12,7 +12,8 @@
         padding: 0;
         display: flex;
         justify-content: center;
-        background: #f9f9f9;
+        background: #000; /* Black background */
+        color: #fff; /* White text */
         min-height: 100vh;
     }
     #main-content {
@@ -21,7 +22,7 @@
         max-width: 1280px;
     }
     #player {
-        flex-grow: 1;
+        flex: 3; /* Larger portion for the video player */
         position: relative;
         padding-top: 56.25%; /* 16:9 Aspect Ratio */
     }
@@ -33,25 +34,25 @@
         height: 100%;
     }
     #playlist {
-        width: 300px;
+        flex: 1; /* Smaller portion for the playlist */
         overflow-y: auto;
         height: 100vh; /* Full-height viewport */
-        border-left: 1px solid #ccc;
+        border-left: 1px solid #333; /* Subtle border color */
     }
     .playlist-item {
         cursor: pointer;
         padding: 10px;
         display: flex;
         align-items: center;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #444; /* Subtle border color */
     }
     .playlist-item img {
-        width: 50px;
-        height: 28px;
+        width: 100px; /* Larger thumbnails */
+        height: 56px; /* Keep aspect ratio of thumbnails */
         margin-right: 10px;
     }
     .playlist-item:hover {
-        background-color: #f0f0f0;
+        background-color: #222; /* Darker background on hover */
     }
 </style>
 </head>
