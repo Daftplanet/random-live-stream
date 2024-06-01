@@ -120,27 +120,46 @@
         'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g'
     ];
 
-    var channelIds = [
-        'UCSIoBMWnKJw2EJ60qTerM3g', // Replace these with actual channel IDs
-    
-    ];
+    function getChannelId(videoId) {
+        const apiKey = 'YOUR_API_KEY'; // Replace with your YouTube Data API key
+        const url = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet`;
+
+        return fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.items && data.items.length > 0) {
+                    return data.items[0].snippet.channelId;
+                } else {
+                    throw new Error('Channel ID not found');
+                }
+            });
+    }
 
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
         var videoId = randomUrl.split('/live/')[1].split('?')[0];
-        var channelId = channelIds[randomIndex];
 
-        var player = document.getElementById('player');
-        var subscribe = document.getElementById('subscribe');
-        player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
-                           '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-        subscribe.innerHTML = '<iframe src="https://www.youtube.com/subscribe_embed?channel=' + channelId +
-                              '" style="width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        getChannelId(videoId).then(channelId => {
+            var player = document.getElementById('player');
+            var subscribe = document.getElementById('subscribe');
+            player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
+                               '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+            subscribe.innerHTML = '<div class="g-ytsubscribe" data-channelid="' + channelId + '" data-layout="full" data-count="default"></div>';
+            gapi.ytsubscribe.go(); // Refresh the subscription button
+        }).catch(error => {
+            console.error('Error fetching channel ID:', error);
+        });
     }
 
-    // Automatically play a random video on page load
-    playRandomVideo();
+    function loadGoogleApi() {
+        var script = document.createElement('script');
+        script.src = "https://apis.google.com/js/platform.js";
+        script.onload = playRandomVideo; // Play a random video once the script loads
+        document.body.appendChild(script);
+    }
+
+    loadGoogleApi(); // Load the Google API script
 </script>
 
 </body>
