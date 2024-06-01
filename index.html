@@ -35,9 +35,9 @@
         height: 100%;
     }
     #chat {
-        width: 100%; /* Same width as the player */
-        height: 400px; /* Adjustable based on your preference */
-        margin-top: 20px; /* Space between the video player and the chat */
+        width: 100%;
+        margin-top: 20px; /* Space between video and chat */
+        height: 400px; /* Adjust based on desired chat height */
     }
     button {
         padding: 10px 20px;
@@ -58,9 +58,8 @@
             width: 100%;
         }
         #prevButton, #nextButton {
-            position: static; /* Remove absolute positioning */
-            transform: none;
-            margin: 10px; /* Provide some spacing */
+            position: static;
+            margin: 10px;
         }
         #player {
             padding-top: 75%; /* Adjust video aspect for smaller screens */
@@ -71,7 +70,7 @@
 <body>
 
 <div id="player"></div>
-<div id="chat"></div> <!-- Chat iframe goes here -->
+<div id="chat"></div> <!-- Container for the chat iframe -->
 <div id="buttonContainer">
     <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
     <button id="nextButton" onclick="playRandomVideo()">&#10095; Next</button>
@@ -87,14 +86,14 @@
     function playRandomVideo() {
         var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
         var randomUrl = youtubeUrls[randomIndex];
-        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Extract the video ID
+        var videoId = randomUrl.split('/live/')[1].split('?')[0]; // Correctly extract the video ID
 
         var player = document.getElementById('player');
         var chat = document.getElementById('chat');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                            '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
         chat.innerHTML = '<iframe src="https://www.youtube.com/live_chat?v=' + videoId +
-                         '&embed_domain=' + window.location.hostname + '" frameborder="0" style="height: 400px; width: 100%;"></iframe>';
+                         '&embed_domain=' + window.location.hostname + '" style="width: 100%; height: 100%;" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
     }
 
     // Automatically play a random video on page load
