@@ -16,6 +16,7 @@
         display: flex;
         justify-content: center;
         min-height: 100vh;
+        align-items: center; /* Center content vertically */
     }
 
     #content {
@@ -28,6 +29,7 @@
         background-color: #000;
         position: relative;
         padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        width: 100%; /* Ensure player takes full width */
     }
 
     iframe {
@@ -44,6 +46,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: row; /* Ensures buttons are in a row */
     }
 
     button, #subscribe {
@@ -63,7 +66,26 @@
     button:hover, #subscribe:hover {
         background-color: #CC0000; /* Darker red on hover */
     }
+
+    @media (max-width: 768px) {
+        body, #content {
+            display: flex;
+            flex-direction: column; /* Stack vertically */
+            justify-content: center;
+            align-items: center;
+        }
+
+        #buttonContainer {
+            width: 100%; /* Full width to accommodate smaller screens */
+            justify-content: space-around; /* Evenly space out buttons */
+        }
+
+        #player {
+            padding-top: 75%; /* Adjust aspect ratio for better visibility */
+        }
+    }
 </style>
+
 </head>
 <body>
 
