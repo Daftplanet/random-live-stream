@@ -111,7 +111,7 @@
             });
     }
 
- function playRandomVideo() {
+function playRandomVideo() {
     var randomIndex = Math.floor(Math.random() * youtubeUrls.length);
     var randomUrl = youtubeUrls[randomIndex];
     var videoId = randomUrl.split('/live/')[1].split('?')[0];
@@ -120,12 +120,16 @@
         var player = document.getElementById('player');
         var subscribe = document.getElementById('subscribe');
         player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
-                           '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1&enablejsapi=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                           '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+        // Update the subscribe button link to include the sub_confirmation parameter
         subscribe.href = 'https://www.youtube.com/channel/' + channelId + '?sub_confirmation=1';
+        subscribe.style.display = 'block'; // Ensure the subscribe button is visible
     }).catch(error => {
         console.error('Error fetching channel ID:', error);
+        subscribe.style.display = 'none'; // Hide the subscribe button if the channel ID cannot be fetched
     });
 }
+
 
 
     playRandomVideo(); // Load and play a random video on page load
