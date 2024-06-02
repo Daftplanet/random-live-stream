@@ -39,41 +39,28 @@
         border: none;
     }
 
-    #subscribe {
-        position: absolute;
-        bottom: 10px; /* Position at the bottom of the player */
-        left: 50%;
-        transform: translateX(-50%); /* Center horizontally */
-        background-color: #FF0000; /* YouTube red */
-        color: white;
-        font-weight: bold; /* Bold text */
-        padding: 10px 20px;
-        font-size: 18px;
-        border-radius: 2px;
-        cursor: pointer;
-        text-decoration: none;
-        display: block;
-    }
-
     #buttonContainer {
         margin-top: 20px;
         display: flex;
         justify-content: center;
+        align-items: center;
     }
 
-    button {
-        background-color: #FF0000; /* Red background */
-        color: white; /* White text */
+    button, #subscribe {
+        background-color: #FF0000; /* YouTube red */
+        color: white;
         font-weight: bold; /* Bold text */
         border: none;
         padding: 10px 20px;
-        margin: 0 50px; /* Increased spacing between buttons */
+        margin: 0 20px; /* Space around buttons */
         cursor: pointer;
         transition: background-color 0.3s;
         border-radius: 2px; /* Rounded corners */
+        text-decoration: none;
+        display: inline-block; /* Align properly with buttons */
     }
 
-    button:hover {
+    button:hover, #subscribe:hover {
         background-color: #CC0000; /* Darker red on hover */
     }
 </style>
@@ -81,37 +68,21 @@
 <body>
 
 <div id="content">
-    <div id="player">
-        <a id="subscribe" href="#" target="_blank">Subscribe to Channel</a>
-    </div>
+    <div id="player"></div>
     <div id="buttonContainer">
         <button id="prevButton" onclick="playRandomVideo()">&#10094; Prev</button>
+        <a id="subscribe" href="#" target="_blank">Subscribe</a>
         <button id="nextButton" onclick="playRandomVideo()">&#10095; Next</button>
     </div>
 </div>
 
 <script>
     var youtubeUrls = [
-         'https://www.youtube.com/live/kiN5q-FzAXY?si=504qqsKjHNCY3h9M',
-        'https://www.youtube.com/live/9w0s9TuSrhQ?si=_1sZmHYDZbm2f7TB',
-        'https://www.youtube.com/live/Wj3BEXUsmKo?si=d4mDraeu8dz4VM1Z',
-        'https://www.youtube.com/live/vZHgMGt1PGY?si=QHN8lE6LZ-1bM2Pk',
-        'https://www.youtube.com/live/__umlnpqMoA?si=Q8T4YPQr50Svnl-j',
-        'https://www.youtube.com/live/g64fraJBSUA?si=P--oMPvglqzh7Ezm',
-        'https://www.youtube.com/live/EVSZPcx3JmY?si=bhlIHwFE7rgDnGRv',
-        'https://www.youtube.com/live/TcWVOTgVXZo?si=gCSEgcOSHsahwzKT',
-        'https://www.youtube.com/live/Q8BUa-wYDpE?si=aVVJaEMz01kLCQt4',
-        'https://www.youtube.com/live/K8u0McbjUsg?si=nfzqQxbg5b2UoPAK',
-        'https://www.youtube.com/live/ULv3A0a5OLk?si=33VwoSxK2vktEX4E',
-        'https://www.youtube.com/live/agF0565fQxw?si=9DsxmNpcHvVuxP53',
-        'https://www.youtube.com/live/KBdW7VZWo14?si=w9byN-4ngbKQdhSs',
-        'https://www.youtube.com/live/4JPex4AAL48?si=-Jv9cq_eqJY87j4d',
-        'https://www.youtube.com/live/pLFP4nQvokk?si=rooDaFrXwSO6bT9g'
-        // List your YouTube URLs here
+        // Your URLs here
     ];
 
     function getChannelId(videoId) {
-        const apiKey = 'AIzaSyD84AiG--68_DTmxWgVhYwFKSz0X3r1jOs';  // Insert your actual YouTube API key here
+        const apiKey = 'YOUR_YOUTUBE_API_KEY';  // Insert your actual YouTube API key here
         const url = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet`;
 
         return fetch(url)
@@ -136,16 +107,13 @@
             player.innerHTML = '<iframe src="https://www.youtube.com/embed/' + videoId +
                                '?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
             subscribe.href = 'https://www.youtube.com/channel/' + channelId + '?sub_confirmation=1';
-            subscribe.style.display = 'block'; // Ensure the subscribe button is visible
         }).catch(error => {
             console.error('Error fetching channel ID:', error);
-            subscribe.style.display = 'none'; // Hide the subscribe button if the channel ID cannot be fetched
         });
     }
 
     playRandomVideo(); // Load and play a random video on page load
 </script>
-
 
 </body>
 </html>
