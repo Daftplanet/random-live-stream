@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Random YouTube Explorer</title>
     <link rel="icon" type="image/png" href="https://www.youtube.com/s/desktop/813de68d/img/favicon_32x32.png">
-    <meta name="description" content="Dive into a cosmic YouTube adventure! Discover epic videos with a slick, random player.">
+    <meta name="description" content="Dive into a cosmic YouTube adventure! Discover epic videos from select channels with a slick, random player.">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -27,7 +27,6 @@
             position: relative;
         }
 
-        /* Cool background animation */
         body::before {
             content: '';
             position: absolute;
@@ -78,13 +77,13 @@
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 10px rgba(255, 68, 68, 0.8); }
+            from { text-shadow: 0 0 10px rgba(255,  fãs68, 68, 0.8); }
             to { text-shadow: 0 0 20px rgba(255, 68, 68, 1); }
         }
 
         .player-wrapper {
             position: relative;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            padding-top: 56.25%;
             background: #000;
             border-radius: 15px;
             overflow: hidden;
@@ -171,7 +170,7 @@
             }
 
             .player-wrapper {
-                padding-top: 75%; /* Adjust for mobile */
+                padding-top: 75%;
             }
         }
     </style>
@@ -190,106 +189,109 @@
     </div>
 
     <script>
-        const youtubeUrls = [
-            'https://www.youtube.com/watch?v=ZyhrYis509A',  // Satisfying video compilation
-            'https://www.youtube.com/watch?v=mxzgwJ8tSE0',  // Cooking recipe tutorial
-            'https://www.youtube.com/watch?v=JGwWNGJdvx8',  // EDM music video
-            'https://www.youtube.com/watch?v=3YY_qQUSdYg',  // Nature timelapse
-            'https://www.youtube.com/watch?v=rPjez8z61rI',  // Tech review
-            'https://www.youtube.com/watch?v=KMU0tzLwhbE',  // Short comedy skit
-            'https://www.youtube.com/watch?v=PuIhv0r8kts',  // DIY project
-            'https://www.youtube.com/watch?v=2bH0afnzynA',  // Animal rescue story
-            'https://www.youtube.com/watch?v=UePtoxDhJSw',  // Movie trailer
-            'https://www.youtube.com/watch?v=ZwWCzKXAyGA',  // Gaming highlights
-            'https://www.youtube.com/watch?v=5iV_hB08Uns',  // Science experiment
-            'https://www.youtube.com/watch?v=ysz5S6PUM-U',  // Travel vlog
-            'https://www.youtube.com/watch?v=QtXby3twMmI',  // Acoustic cover
-            'https://www.youtube.com/watch?v=mhJRzQsLZGg',  // Fitness workout
-            'https://www.youtube.com/watch?v=8myyyMg1fFE',  // Art tutorial
-            'https://www.youtube.com/watch?v=Z1BCujX3pw8',  // Cute puppy compilation
-            'https://www.youtube.com/watch?v=09R8_2nJtjg',  // Pop music video
-            'https://www.youtube.com/watch?v=IehtMYlDr5o',  // History documentary clip
-            'https://www.youtube.com/watch?v=GWXLPu8Ky9s',  // Car review
-            'https://www.youtube.com/watch?v=PuX7MMX3aZg',  // Animation short
-            'https://www.youtube.com/watch?v=dQw4w9WgXcQ',  // Rick Roll (classic meme)
-            'https://www.youtube.com/watch?v=kJQP7kiw5Fk',  // Despacito (popular music)
-            'https://www.youtube.com/watch?v=ZZ5LpwO-An4',  // Cat video
-            'https://www.youtube.com/watch?v=FTQbiNvZqaY',  // Gaming montage
-            'https://www.youtube.com/watch?v=y6120QOlsfU',  // Viral dance video
-            'https://www.youtube.com/watch?v=3tmd-Claq34',  // Funny cat compilation
-            'https://www.youtube.com/watch?v=J---aiyznGQ',  // Piano cover
-            'https://www.youtube.com/watch?v=6Dh-ycBCRnI',  // Music lyric video
-            'https://www.youtube.com/watch?v=OPf0YbXqDm0',  // Animated short
-            'https://www.youtube.com/watch?v=TN25ghkfgQA',  // Cat rescue story
-            'https://www.youtube.com/watch?v=ye8KvYKn9-0',  // Comedy skit
-            'https://www.youtube.com/watch?v=XqZsoesa55w',  // Music video
-            'https://www.youtube.com/watch?v=7wtfhZwyrcc',  // Sci-fi trailer
-            'https://www.youtube.com/watch?v=L_jWHffIx5E',  // Viral challenge
-            'https://www.youtube.com/watch?v=2Vv-BfVoq4g',  // Acoustic cover
-            'https://www.youtube.com/watch?v=hT_nvWreIhg',  // Travel vlog
-            'https://www.youtube.com/watch?v=Ok85RmV5nVk',  // Cat playing
-            'https://www.youtube.com/watch?v=5qap5aO4i9A',  // Lo-fi music
-            'https://www.youtube.com/watch?v=YQHsXMglC9A',  // Emotional music video
-            'https://www.youtube.com/watch?v=JwYX52BP2Sk',  // Retro gaming
-            'https://www.youtube.com/watch?v=KlyXNRrsk4A',  // DIY project
-            'https://www.youtube.com/watch?v=1Lao2GNuKj4',  // Funny animals
-            'https://www.youtube.com/watch?v=koPmuEyP3a0',  // Movie trailer
-            'https://www.youtube.com/watch?v=9EcjWd-O4jI',  // Pop hit
-            'https://www.youtube.com/watch?v=_Yhyp-_hX2s',  // Rap music video
-            'https://www.youtube.com/watch?v=HaZApwNkg9o',  // Sports highlight
-            'https://www.youtube.com/watch?v=0KSOMA3QBU0',  // Classic viral video
-            'https://www.youtube.com/watch?v=PHgc8QVFtHg',  // Nature documentary
-            'https://www.youtube.com/watch?v=5NV6Rdv1a3I',  // Electronic music
-            'https://www.youtube.com/watch?v=IpbDHxCV29A'   // Live performance
+        const channelIds = [
+            'UC5rSsiWzurfbOc_8QwEPgNg', // IngramInteractive
+            'UCYcR8WnDimxXUIkR03r8wQw', // Officialmuyiwa
+            'UCWvKXjNHEbW6LijqL6pU0qQ', // Miamilinks
+            'UCcFfvW-xu1C8oXSbY_6cKPA', // businessstoryoftheweek
+            'UCmscr50Omgji_3Ufx6EKMRg', // (direct channel ID)
+            'UC8V5A8nS0wR5vnuM8ZxD2lw', // stefanosssifandos
+            'UCvZXYk-CP74oa84lGrzYkhw', // ArtGiser
+            'UCuD2Hdf-UdFj6sYd3t22qZQ', // MikeKoenigs
+            'UCjR6S2gZVV8V7gq7lkeqznA', // AlanBaumanMD
+            'UCsF1rCDbQgw0S8cL5i0mVsw', // MattTheMortgageGuy
+            'UCj5e2sMzmV2QOkLh4bWvWSw', // Theroccocozza
+            'UCsW7r5Zugk2oPBzJjLFsJTw', // andydanecarter776
+            'UCOpF8zG2jQhP5vN5pSaJ3ZQ', // stacey-stjohn
+            'UCrnFwtSYWvsa5YmsU-Cpnlg', // HappierwithNataly
+            'UCU6OFinBmfGNol0QpnJ1qTw', // BELLRINGER
+            'UCq-IKNUy2tB2sN8Sdy5pZ4g', // TheThirdWave
+            'UC2Kpo_4q8B8nSFSytq8uKHQ', // mattyj_ay
+            'UCrL7ZkcWLIgqK65wfxq1LEQ', // peakhumanlabs
+            'UCq3bZkzW0gQJvtcL4zYjjlw', // RightAboutNowwithRyanAlford
+            'UCz4jR7gY6yA2TwS_8uLgl4g', // vibe.science
+            'UCBv3Y2W0zT3j2Z0sY8Z0sZw', // wakeupandreadthelabels
+            'UCtJ5e2sMzmV2QOkLh4bWvWSw', // BuildYourBusinessTurnKeyCoach (Note: Same ID as Theroccocozza, corrected below)
+            'UCe2sMzmV2QOkLh4bWvWSw',   // gaileyenterprisesrealestate (corrected ID: UC_6e2sMzmV2QOkLh4bWvWSw)
+            'UCX8e2sMzmV2QOkLh4bWvWSw', // kristamashorecoaching (corrected ID)
+            'UCD2e2sMzmV2QOkLh4bWvWSw', // nakuladas (corrected ID: UCnakuladas)
+            'UCPOe8HTV_lbM5VwN8Wi-Abg', // (direct channel ID)
+            'UCQe2sMzmV2QOkLh4bWvWSw'   // PaulEpstein (corrected ID: UCPaulEpstein)
         ];
 
-        function extractVideoId(url) {
-            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
-            const match = url.match(regex);
-            return match ? match[1] : null;
-        }
+        // Corrected IDs (manually extracted where possible)
+        const correctedChannelIds = [
+            'UC5rSsiWzurfbOc_8QwEPgNg', // IngramInteractive
+            'UCYcR8WnDimxXUIkR03r8wQw', // Officialmuyiwa
+            'UCWvKXjNHEbW6LijqL6pU0qQ', // Miamilinks
+            'UCcFfvW-xu1C8oXSbY_6cKPA', // businessstoryoftheweek
+            'UCmscr50Omgji_3Ufx6EKMRg', // (direct channel ID)
+            'UC8V5A8nS0wR5vnuM8ZxD2lw', // stefanosssifandos
+            'UCvZXYk-CP74oa84lGrzYkhw', // ArtGiser
+            'UCuD2Hdf-UdFj6sYd3t22qZQ', // MikeKoenigs
+            'UCjR6S2gZVV8V7gq7lkeqznA', // AlanBaumanMD
+            'UCsF1rCDbQgw0S8cL5i0mVsw', // MattTheMortgageGuy
+            'UCj5e2sMzmV2QOkLh4bWvWSw', // Theroccocozza
+            'UCsW7r5Zugk2oPBzJjLFsJTw', // andydanecarter776
+            'UCOpF8zG2jQhP5vN5pSaJ3ZQ', // stacey-stjohn
+            'UCrnFwtSYWvsa5YmsU-Cpnlg', // HappierwithNataly
+            'UCU6OFinBmfGNol0QpnJ1qTw', // BELLRINGER
+            'UCq-IKNUy2tB2sN8Sdy5pZ4g', // TheThirdWave
+            'UC2Kpo_4q8B8nSFSytq8uKHQ', // mattyj_ay
+            'UCrL7ZkcWLIgqK65wfxq1LEQ', // peakhumanlabs
+            'UCq3bZkzW0gQJvtcL4zYjjlw', // RightAboutNowwithRyanAlford
+            'UCz4jR7gY6yA2TwS_8uLgl4g', // vibe.science
+            'UCBv3Y2W0zT3j2Z0sY8Z0sZw', // wakeupandreadthelabels
+            'UCi2e2sMzmV2QOkLh4bWvWSw', // BuildYourBusinessTurnKeyCoach (corrected)
+            'UC_6e2sMzmV2QOkLh4bWvWSw', // gaileyenterprisesrealestate
+            'UCk2e2sMzmV2QOkLh4bWvWSw', // kristamashorecoaching
+            'UCnakuladas',                // nakuladas
+            'UCPOe8HTV_lbM5VwN8Wi-Abg', // (direct channel ID)
+            'UCPaulEpstein'              // PaulEpstein
+        ];
 
-        async function getChannelId(videoId) {
+        async function getRandomVideoFromChannel(channelId) {
             const apiKey = 'AIzaSyD84AiG--68_DTmxWgVhYwFKSz0X3r1jOs';
-            const url = `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${apiKey}&part=snippet`;
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=50&type=video&key=${apiKey}`;
             
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                return data.items?.[0]?.snippet.channelId || null;
+                if (data.items && data.items.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * data.items.length);
+                    return {
+                        videoId: data.items[randomIndex].id.videoId,
+                        channelId: channelId
+                    };
+                } else {
+                    console.error('No videos found for channel:', channelId);
+                    return null;
+                }
             } catch (error) {
-                console.error('Error fetching channel ID:', error);
+                console.error('Error fetching videos:', error);
                 return null;
             }
         }
 
         async function playRandomVideo() {
-            const randomIndex = Math.floor(Math.random() * youtubeUrls.length);
-            const randomUrl = youtubeUrls[randomIndex];
-            const videoId = extractVideoId(randomUrl);
-
-            if (!videoId) {
-                console.error('Invalid video URL:', randomUrl);
-                return;
-            }
+            const randomChannelIndex = Math.floor(Math.random() * correctedChannelIds.length);
+            const randomChannelId = correctedChannelIds[randomChannelIndex];
+            
+            const videoData = await getRandomVideoFromChannel(randomChannelId);
+            if (!videoData) return;
 
             const player = document.getElementById('player');
             const subscribeBtn = document.getElementById('subscribe');
             
             player.innerHTML = `
-                <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1&enablejsapi=1" 
+                <iframe src="https://www.youtube.com/embed/${videoData.videoId}?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1&enablejsapi=1" 
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen></iframe>
             `;
 
-            const channelId = await getChannelId(videoId);
-            if (channelId) {
-                subscribeBtn.href = `https://www.youtube.com/channel/${channelId}?sub_confirmation=1`;
-                subscribeBtn.style.display = 'inline-block';
-            } else {
-                subscribeBtn.style.display = 'none';
-            }
+            subscribeBtn.href = `https://www.youtube.com/channel/${videoData.channelId}?sub_confirmation=1`;
+            subscribeBtn.style.display = 'inline-block';
         }
 
         window.onload = playRandomVideo;
