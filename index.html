@@ -77,7 +77,7 @@
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 10px rgba(255,  fãs68, 68, 0.8); }
+            from { text-shadow: 0 0 10px rgba(255, 68, 68, 0.8); }
             to { text-shadow: 0 0 20px rgba(255, 68, 68, 1); }
         }
 
@@ -190,111 +190,97 @@
 
     <script>
         const channelIds = [
-            'UC5rSsiWzurfbOc_8QwEPgNg', // IngramInteractive
-            'UCYcR8WnDimxXUIkR03r8wQw', // Officialmuyiwa
-            'UCWvKXjNHEbW6LijqL6pU0qQ', // Miamilinks
-            'UCcFfvW-xu1C8oXSbY_6cKPA', // businessstoryoftheweek
-            'UCmscr50Omgji_3Ufx6EKMRg', // (direct channel ID)
-            'UC8V5A8nS0wR5vnuM8ZxD2lw', // stefanosssifandos
-            'UCvZXYk-CP74oa84lGrzYkhw', // ArtGiser
-            'UCuD2Hdf-UdFj6sYd3t22qZQ', // MikeKoenigs
-            'UCjR6S2gZVV8V7gq7lkeqznA', // AlanBaumanMD
-            'UCsF1rCDbQgw0S8cL5i0mVsw', // MattTheMortgageGuy
-            'UCj5e2sMzmV2QOkLh4bWvWSw', // Theroccocozza
-            'UCsW7r5Zugk2oPBzJjLFsJTw', // andydanecarter776
-            'UCOpF8zG2jQhP5vN5pSaJ3ZQ', // stacey-stjohn
-            'UCrnFwtSYWvsa5YmsU-Cpnlg', // HappierwithNataly
-            'UCU6OFinBmfGNol0QpnJ1qTw', // BELLRINGER
-            'UCq-IKNUy2tB2sN8Sdy5pZ4g', // TheThirdWave
-            'UC2Kpo_4q8B8nSFSytq8uKHQ', // mattyj_ay
-            'UCrL7ZkcWLIgqK65wfxq1LEQ', // peakhumanlabs
-            'UCq3bZkzW0gQJvtcL4zYjjlw', // RightAboutNowwithRyanAlford
-            'UCz4jR7gY6yA2TwS_8uLgl4g', // vibe.science
-            'UCBv3Y2W0zT3j2Z0sY8Z0sZw', // wakeupandreadthelabels
-            'UCtJ5e2sMzmV2QOkLh4bWvWSw', // BuildYourBusinessTurnKeyCoach (Note: Same ID as Theroccocozza, corrected below)
-            'UCe2sMzmV2QOkLh4bWvWSw',   // gaileyenterprisesrealestate (corrected ID: UC_6e2sMzmV2QOkLh4bWvWSw)
-            'UCX8e2sMzmV2QOkLh4bWvWSw', // kristamashorecoaching (corrected ID)
-            'UCD2e2sMzmV2QOkLh4bWvWSw', // nakuladas (corrected ID: UCnakuladas)
-            'UCPOe8HTV_lbM5VwN8Wi-Abg', // (direct channel ID)
-            'UCQe2sMzmV2QOkLh4bWvWSw'   // PaulEpstein (corrected ID: UCPaulEpstein)
+            'UCnPUGEr7oD81Nh5esk9nZQQ',
+            'UCGIzrWn3-30UzwTWBAL4jWQ',
+            'UChuSzFWySZLi2XO3YwTkK2Q',
+            'UCX59Z1-L4LBe7-qKEz_-QzA',
+            'UCmscr50Omgji_3Ufx6EKMRg',
+            'UCU3j9q3vcGbW_fZQaaem5Hw',
+            'UC_gA1J3umxYFEqUJkw_qj7A',
+            'UCY9cgz0qiEIHKYk-deyQGVA',
+            'UC76IfFEFOt6jB2dFv9gcXNQ',
+            'UCq2XM1Q4PXs-msULABdk2Yw',
+            'UChX3SsjBPjY0rScBqZgJtFA',
+            'UCRbJxJ80JSt2FbuVqdgm6QQ',
+            'UCVeWMoAJBVZOyVQTuk_ZF0w',
+            'UCCIzQuKt0n3uH6LwlbjwMig',
+            'UCNHW5YCvQmq6zhVHEMlqUeg',
+            'UCATHWJYqouqzF3-5GMIaOuQ',
+            'UCVLk0UmBqWSiUU3SFKrFtig',
+            'UCWuBeURQHe6OeL30kZRfYPg',
+            'UCc8gmekIb1SS1s216ASNT_w',
+            'UCTk7kvaDAqeuzXRXQ60UsjA',
+            'UC20se2ZpeYBdmejTfxBllCQ',
+            'UC43J4nT7mxFC2BYhu4rnslQ',
+            'UCrgcAXqvCghlkSAwM4Ke3bQ',
+            'UCRxGI0rigYqkRe27pUVNjQw',
+            'UCpEVPrzmJGAWOxmTVbdu2tA',
+            'UCd2S2QDuZPk2gGff1-KBskA',
+            'UCrSuHGQ5hbQ0U4OjpnNpM4g',
+            'UCoi-XJT3UfouhAT0GkkayVw'
         ];
 
-        // Corrected IDs (manually extracted where possible)
-        const correctedChannelIds = [
-            'UC5rSsiWzurfbOc_8QwEPgNg', // IngramInteractive
-            'UCYcR8WnDimxXUIkR03r8wQw', // Officialmuyiwa
-            'UCWvKXjNHEbW6LijqL6pU0qQ', // Miamilinks
-            'UCcFfvW-xu1C8oXSbY_6cKPA', // businessstoryoftheweek
-            'UCmscr50Omgji_3Ufx6EKMRg', // (direct channel ID)
-            'UC8V5A8nS0wR5vnuM8ZxD2lw', // stefanosssifandos
-            'UCvZXYk-CP74oa84lGrzYkhw', // ArtGiser
-            'UCuD2Hdf-UdFj6sYd3t22qZQ', // MikeKoenigs
-            'UCjR6S2gZVV8V7gq7lkeqznA', // AlanBaumanMD
-            'UCsF1rCDbQgw0S8cL5i0mVsw', // MattTheMortgageGuy
-            'UCj5e2sMzmV2QOkLh4bWvWSw', // Theroccocozza
-            'UCsW7r5Zugk2oPBzJjLFsJTw', // andydanecarter776
-            'UCOpF8zG2jQhP5vN5pSaJ3ZQ', // stacey-stjohn
-            'UCrnFwtSYWvsa5YmsU-Cpnlg', // HappierwithNataly
-            'UCU6OFinBmfGNol0QpnJ1qTw', // BELLRINGER
-            'UCq-IKNUy2tB2sN8Sdy5pZ4g', // TheThirdWave
-            'UC2Kpo_4q8B8nSFSytq8uKHQ', // mattyj_ay
-            'UCrL7ZkcWLIgqK65wfxq1LEQ', // peakhumanlabs
-            'UCq3bZkzW0gQJvtcL4zYjjlw', // RightAboutNowwithRyanAlford
-            'UCz4jR7gY6yA2TwS_8uLgl4g', // vibe.science
-            'UCBv3Y2W0zT3j2Z0sY8Z0sZw', // wakeupandreadthelabels
-            'UCi2e2sMzmV2QOkLh4bWvWSw', // BuildYourBusinessTurnKeyCoach (corrected)
-            'UC_6e2sMzmV2QOkLh4bWvWSw', // gaileyenterprisesrealestate
-            'UCk2e2sMzmV2QOkLh4bWvWSw', // kristamashorecoaching
-            'UCnakuladas',                // nakuladas
-            'UCPOe8HTV_lbM5VwN8Wi-Abg', // (direct channel ID)
-            'UCPaulEpstein'              // PaulEpstein
-        ];
+        let videoCache = {};
 
-        async function getRandomVideoFromChannel(channelId) {
+        // Fetch videos from a channel and cache them
+        async function fetchVideosFromChannel(channelId) {
             const apiKey = 'AIzaSyD84AiG--68_DTmxWgVhYwFKSz0X3r1jOs';
-            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=50&type=video&key=${apiKey}`;
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=25&type=video&key=${apiKey}`;
             
             try {
                 const response = await fetch(url);
                 const data = await response.json();
                 if (data.items && data.items.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * data.items.length);
-                    return {
-                        videoId: data.items[randomIndex].id.videoId,
+                    videoCache[channelId] = data.items.map(item => ({
+                        videoId: item.id.videoId,
                         channelId: channelId
-                    };
+                    }));
                 } else {
-                    console.error('No videos found for channel:', channelId);
-                    return null;
+                    console.warn(`No videos found for channel: ${channelId}`);
+                    videoCache[channelId] = [];
                 }
             } catch (error) {
-                console.error('Error fetching videos:', error);
-                return null;
+                console.error(`Error fetching videos for channel ${channelId}:`, error);
+                videoCache[channelId] = [];
             }
         }
 
-        async function playRandomVideo() {
-            const randomChannelIndex = Math.floor(Math.random() * correctedChannelIds.length);
-            const randomChannelId = correctedChannelIds[randomChannelIndex];
-            
-            const videoData = await getRandomVideoFromChannel(randomChannelId);
-            if (!videoData) return;
+        // Preload videos for all channels on page load
+        async function preloadVideos() {
+            const fetchPromises = channelIds.map(channelId => fetchVideosFromChannel(channelId));
+            await Promise.all(fetchPromises);
+            console.log('Video cache loaded:', videoCache);
+            playRandomVideo(); // Play first video after preload
+        }
+
+        // Play a random video from the cached list
+        function playRandomVideo() {
+            const validChannels = Object.keys(videoCache).filter(channelId => videoCache[channelId].length > 0);
+            if (validChannels.length === 0) {
+                console.error('No videos available in cache');
+                return;
+            }
+
+            const randomChannelId = validChannels[Math.floor(Math.random() * validChannels.length)];
+            const videos = videoCache[randomChannelId];
+            const randomVideo = videos[Math.floor(Math.random() * videos.length)];
 
             const player = document.getElementById('player');
             const subscribeBtn = document.getElementById('subscribe');
             
             player.innerHTML = `
-                <iframe src="https://www.youtube.com/embed/${videoData.videoId}?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1&enablejsapi=1" 
+                <iframe src="https://www.youtube.com/embed/${randomVideo.videoId}?autoplay=1&mute=0&playsinline=1&fs=1&modestbranding=1&enablejsapi=1" 
                         frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen></iframe>
             `;
 
-            subscribeBtn.href = `https://www.youtube.com/channel/${videoData.channelId}?sub_confirmation=1`;
+            subscribeBtn.href = `https://www.youtube.com/channel/${randomVideo.channelId}?sub_confirmation=1`;
             subscribeBtn.style.display = 'inline-block';
         }
 
-        window.onload = playRandomVideo;
+        // Start preloading on page load
+        window.onload = preloadVideos;
     </script>
 </body>
 </html>
